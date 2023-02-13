@@ -1,0 +1,26 @@
+name: Security
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+      - uses: ./.github/actions/python-setup
+      - name: Run security scan on package code
+        run: poetry run bandit -r file_memoizer
+      - name: Run security scan on test code
+        run: poetry run bandit -s B101 -r tests
+      - name: Run security scan on dependencies
+        run: poetry run safety check --full-report
