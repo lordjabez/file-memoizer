@@ -66,6 +66,7 @@ there are situations where it's okay to ignore them, such as an object method wh
 return value doesn't depend on the object's internal state. In these cases, set
 `unhashable_args='ignore'` as shown below:
 
+```python3
 class Arithmetic():
 
     @staticmethod
