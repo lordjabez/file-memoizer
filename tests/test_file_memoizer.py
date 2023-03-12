@@ -132,7 +132,7 @@ def test_unhashable_arg_fails():
         return value_1 * value_2
 
     with pytest.raises(TypeError):
-        multiply([1], 2)
+        multiply(datetime.datetime.now(), 2)
 
 
 def test_unhashable_arg_ignored():
@@ -145,3 +145,17 @@ def test_unhashable_arg_ignored():
 
     result = multiply([1], 2)
     assert result == [1, 1]
+
+
+def test_precache_result():
+    """Precached result is returned when provided."""
+
+    @file_memoizer.memoize()
+    def multiply(value_1, value_2):
+        _set_execution_flag()
+        return value_1 * value_2
+
+    print(multiply)
+    multiply.precache_result(2, 3, result_to_cache=7)
+    result = multiply(2, 3)
+    assert result == 7
