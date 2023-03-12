@@ -56,8 +56,8 @@ def memoize(cache_ttl=None, cache_directory=None, unhashable_args='fail'):
         cache_params['hash_params'] = _get_cache_key
 
     def decorator(function_to_memoize):
-        @functools.wraps(function_to_memoize)
         @cachier.cachier(**cache_params)
+        @functools.wraps(function_to_memoize)
         def wrapper(*args, **kwargs):
             return kwargs['result_to_cache'] if 'result_to_cache' in kwargs else function_to_memoize(*args, **kwargs)
         wrapper.precache_result = functools.partial(wrapper, overwrite_cache=True)
