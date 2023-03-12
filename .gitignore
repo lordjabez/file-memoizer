@@ -2,5 +2,5 @@
 .pytest_cache
 dist
 __pycache__
-.coverage
+.coverage*
 coverage.xml

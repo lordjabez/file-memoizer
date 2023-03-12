@@ -17,8 +17,4 @@ runs:
       run: poetry install --no-interaction --no-root
     - name: Set version string based on tag
       shell: bash
-      run: |
-        export VERSION_NUMBER="$(git describe --tags --abbrev=8 | sed 's/-.*g/+/' | tr -d 'v')"
-        export VERSION_NUMBER="${VERSION_NUMBER:-0.0.0}"
-        sed -i "s/version = \"0.0.0\"/version = \"${VERSION_NUMBER}\"/" pyproject.toml
-        sed -i "s/__version__ = '0.0.0'/__version__ = '${VERSION_NUMBER}'/" file_memoizer/__init__.py
+      run: .scripts/version.bash
