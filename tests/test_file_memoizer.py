@@ -88,17 +88,6 @@ def test_default_memoize():
     assert _execution_flag_exists()
 
 
-def test_custom_directory():
-    """Customized cache file location is used when provided."""
-
-    @file_memoizer.memoize(cache_directory=_custom_cache_directory)
-    def double(value):
-        _set_execution_flag()
-        return value * 2
-
-    assert double.cache_dpath() == _custom_cache_directory
-
-
 def test_custom_ttl():
     """Customized cache time-to-live is used when provided."""
 
@@ -121,6 +110,17 @@ def test_custom_ttl():
     result = double(1)
     assert result == 2
     assert _execution_flag_exists()
+
+
+def test_custom_directory():
+    """Customized cache file location is used when provided."""
+
+    @file_memoizer.memoize(cache_directory=_custom_cache_directory)
+    def double(value):
+        _set_execution_flag()
+        return value * 2
+
+    assert double.cache_dpath() == _custom_cache_directory
 
 
 def test_unhashable_arg_fails():
