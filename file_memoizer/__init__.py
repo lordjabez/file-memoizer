@@ -26,10 +26,10 @@ def _get_cache_key(args, kwargs, ignore_self=False):
     :param ignore_self: If true, first argument is self and should be ignored
     :return: unique hex string based on inputs
     """
-    if ignore_self:
-        args = args[1:]
     if 'result_to_cache' in kwargs:
         kwargs = {k: v for k, v in kwargs.items() if k != 'result_to_cache'}
+    elif ignore_self:
+        args = args[1:]
     key = functools._make_key(args, kwargs, False)  # pylint: disable=protected-access
     return hashlib.sha256(str(hash(key)).encode()).hexdigest()
 
