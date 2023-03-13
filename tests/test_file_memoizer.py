@@ -8,8 +8,6 @@ import tempfile
 import time
 import toml
 
-import pytest
-
 import file_memoizer
 
 
@@ -81,7 +79,7 @@ def test_default_memoize():
     assert result == 2
     assert not _execution_flag_exists()
     _clear_execution_flag()
-    double.clear_cache()
+    double.clear_cache()  # pylint: disable=no-member
 
     result = double(1)
     assert result == 2
@@ -123,28 +121,55 @@ def test_custom_directory():
     assert double.cache_dpath() == _custom_cache_directory
 
 
-def test_unhashable_arg_fails():
-    """Unhashable argument causes an error by default."""
+def test_static_method():
+    """Static class method caches as expected."""
 
-    @file_memoizer.memoize()
-    def multiply(value_1, value_2):
-        _set_execution_flag()
-        return value_1 * value_2
+    class TestClass():  # pylint: disable=missing-class-docstring,too-few-public-methods
+        @staticmethod
+        @file_memoizer.memoize()
+        def triple(value):  # pylint: disable=missing-function-docstring
+            _set_execution_flag()
+            return value * 3
 
-    with pytest.raises(TypeError):
-        multiply(datetime.datetime.now(), 2)
+    result = TestClass.triple(1)
+    assert result == 3
+    assert _execution_flag_exists()
+    _clear_execution_flag()
+
+    result = TestClass.triple(1)
+    assert result == 3
+    assert not _execution_flag_exists()
+    _clear_execution_flag()
+    TestClass.triple.clear_cache()  # pylint: disable=no-member
+
+    result = TestClass.triple(1)
+    assert result == 3
+    assert _execution_flag_exists()
 
 
-def test_unhashable_arg_ignored():
-    """Unhashable argument ignored when configured accordingly."""
+def test_object_method():
+    """Object method caches as expected."""
 
-    @file_memoizer.memoize(unhashable_args='ignore')
-    def multiply(value_1, value_2):
-        _set_execution_flag()
-        return value_1 * value_2
+    class TestClass():  # pylint: disable=missing-class-docstring,too-few-public-methods
+        @file_memoizer.memoize()
+        def triple(self, value):  # pylint: disable=missing-function-docstring
+            _set_execution_flag()
+            return value * 3
 
-    result = multiply([1], 2)
-    assert result == [1, 1]
+    result = TestClass().triple(1)
+    assert result == 3
+    assert _execution_flag_exists()
+    _clear_execution_flag()
+
+    result = TestClass().triple(1)
+    assert result == 3
+    assert not _execution_flag_exists()
+    _clear_execution_flag()
+    TestClass.triple.clear_cache()  # pylint: disable=no-member
+
+    result = TestClass().triple(1)
+    assert result == 3
+    assert _execution_flag_exists()
 
 
 def test_precache_result():

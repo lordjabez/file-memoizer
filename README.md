@@ -22,9 +22,10 @@ pip install file-memoizer
 ## Usage
 
 To cache a function's value, annotate it by calling the `memoize`
-function as follows:
+function as follows. Note that all function arguments must be hashable
+for it to be cached else a TypeError will be thrown.
 
-```python3
+```python
 import file_memoizer
 
 @file_memoizer.memoize()
@@ -35,11 +36,12 @@ def double(n):
 By default the cached values remain valid for a day. This can be changed
 with the `cache_ttl` parameter:
 
-```python3
+```python
 import datetime
 import file_memoizer
 
 seven_days = cache_ttl=datetime.timedelta(days=7)
+
 @file_memoizer.memoize(cache_ttl=seven_days)
 def triple(n):
     return 3 * n
@@ -49,30 +51,31 @@ Cache files are stored in `$HOME/.file-memoizer`, with one file per
 combination of input parameters. An alternate location can be specified
 with the `cache_directory` parameter:
 
-```python3
+```python
 import datetime
 import file_memoizer
 
 custom_path = '/path/to/store/files'
+
 @file_memoizer.memoize(cache_directory=custom_path)
 def quadruple(n):
     return 4 * n
 ```
 
-Normally all function arguments must be hashable for it to be safely cached. However,
-there are situations where it's okay to ignore them, such as an object method whose
-return value doesn't depend on the object's internal state. In these cases, set
-`unhashable_args='ignore'` as shown below:
+The memoizer will automatically ignore a function's first parameter if named self,
+so that instance methods can be cached. It is the caller's responsibility to ensure
+the result of the method does not depend on the state of the object's internals.
+This is most useful when the object is being used to call an external service.
 
-```python3
-class Arithmetic():
+```python
+import requests
 
-    @staticmethod
+class ExampleAPIClient():
+
     @file_memoizer.memoize()
-    def quintuple(n):
-         return 5 * n
+    def get(self, url):
+        return self.session.get(url)
     
-    @file_memoizer.memoize(unhashable_args='ignore')
-    def multiply(self, x, y):
-        return x * y
+    def __init__(self):
+        self.session = requests.Session()
 ```
