@@ -172,8 +172,8 @@ def test_object_method():
     assert _execution_flag_exists()
 
 
-def test_precache_result():
-    """Precached result is returned when provided."""
+def test_precache_value():
+    """Precached value is returned when provided."""
 
     class TestClass():  # pylint: disable=missing-class-docstring,too-few-public-methods
         @file_memoizer.memoize()
@@ -184,11 +184,11 @@ def test_precache_result():
     def multiply(value_1, value_2):
         return value_1 * value_2
 
-    multiply.precache_result(2, 3, result_to_cache=7)  # pylint: disable=no-member
+    multiply.precache_value(2, 3, value_to_cache=7)  # pylint: disable=no-member
     result = multiply(2, 3)
     assert result == 7
 
-    TestClass().multiply.precache_result(2, 3, result_to_cache=8)  # pylint: disable=no-member
+    TestClass().multiply.precache_value(2, 3, value_to_cache=8)  # pylint: disable=no-member
     result = TestClass().multiply(2, 3)
     assert result == 8
     TestClass().multiply.clear_cache()  # pylint: disable=no-member

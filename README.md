@@ -5,9 +5,9 @@
 [![Tests](https://github.com/lordjabez/file-memoizer/actions/workflows/test.yml/badge.svg)](https://github.com/lordjabez/file-memoizer/actions/workflows/test.yml)
 [![Release](https://github.com/lordjabez/file-memoizer/actions/workflows/release.yml/badge.svg)](https://github.com/lordjabez/file-memoizer/actions/workflows/release.yml)
 
-This Python package makes it easy to store function results across executions using cache files.
-Underlying functionality is provided by [cachier](https://github.com/python-cachier/cachier), but
-this package adds a few conveniences, such as being able to ignore parameters that won't serialize.
+NOTICE: This package is deprecated and will no longer be updated, as the functionality it provides
+has now been inplemented directly in [cachier](https://github.com/python-cachier/cachier). Please
+use that package directly.
 
 
 ## Installation
@@ -75,7 +75,7 @@ class ExampleAPIClient():
     @file_memoizer.memoize()
     def get(self, url):
         return self.session.get(url)
-    
+
     def __init__(self):
         self.session = requests.Session()
 ```
