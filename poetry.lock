@@ -44,13 +44,13 @@ yaml = ["PyYAML"]
 
 [[package]]
 name = "cachier"
-version = "2.1.1"
+version = "2.2.1"
 description = "Persistent, stale-free, local and cross-machine caching for Python functions."
 optional = false
 python-versions = "*"
 files = [
-    {file = "cachier-2.1.1-py2.py3-none-any.whl", hash = "sha256:ed58ee4c528c23fcb2f977390ed16eca84dae07ea2012a8fc474909c9fc14c2a"},
-    {file = "cachier-2.1.1.tar.gz", hash = "sha256:b814be39e0fdc3ef8a6f8dc75a1512564f4b98aa306fa746e6f1cbc09fa1ba07"},
+    {file = "cachier-2.2.1-py2.py3-none-any.whl", hash = "sha256:72ae051001261e633a1fb5e947ac27f4757d3c70ccea03ce5c8fac5414d48890"},
+    {file = "cachier-2.2.1.tar.gz", hash = "sha256:9e6f7c2d3f3b67bc84acabc8a8ca7ddce117f530e88eaaad22d82bc878124094"},
 ]
 
 [package.dependencies]
@@ -60,7 +60,7 @@ setuptools = ">=67.6.0"
 watchdog = "*"
 
 [package.extras]
-test = ["bandit", "collective.checkdocs", "coverage", "dnspython", "flake8", "pandas", "pygments", "pylint", "pymongo", "pymongo-inmemory", "pytest", "pytest-cov", "safety"]
+test = ["bandit", "collective.checkdocs", "coverage", "dnspython", "flake8", "mypy", "pandas", "pandas-stubs", "pygments", "pylint", "pymongo", "pymongo-inmemory", "pytest", "pytest-cov", "safety", "types-setuptools"]
 
 [[package]]
 name = "certifi"
