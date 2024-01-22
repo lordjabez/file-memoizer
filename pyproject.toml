@@ -17,7 +17,7 @@ flake8 = "^7.0.0"
 pylint = "^3.0.3"
 pytest = "^7.4.4"
 pytest-cov = "^4.1.0"
-safety = "^2.3.5"
+safety = "^3.0.1"
 toml = "^0.10.2"
 
 [build-system]
