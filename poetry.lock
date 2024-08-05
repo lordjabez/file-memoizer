@@ -54,18 +54,17 @@ yaml = ["PyYAML"]
 
 [[package]]
 name = "cachier"
-version = "3.0.0"
+version = "3.0.1"
 description = "Persistent, stale-free, local and cross-machine caching for Python functions."
 optional = false
 python-versions = "*"
 files = [
-    {file = "cachier-3.0.0-py3-none-any.whl", hash = "sha256:627455077d3619a27b1c63368d49533ffe6807a1b19fe6944e4c8f3ac895d1bc"},
-    {file = "cachier-3.0.0.tar.gz", hash = "sha256:f756ebeabf8b397f75fbbb9a5841972d4c85a81b7313e2812b3448e80d74c66d"},
+    {file = "cachier-3.0.1-py3-none-any.whl", hash = "sha256:f900d11d8e190bdea8c04196a2487ac862263d3ec85c50c7283f4f9a58d2e0aa"},
+    {file = "cachier-3.0.1.tar.gz", hash = "sha256:115dd9586f0f786898526f65308a55df4304e2e213dd70309eb33e7d4d38a95c"},
 ]
 
 [package.dependencies]
 portalocker = ">=2.3.2"
-setuptools = ">=67.6.0"
 watchdog = ">=2.3.1"
 
 [[package]]
