@@ -119,14 +119,14 @@ yaml = ["PyYAML"]
 
 [[package]]
 name = "cachier"
-version = "3.4.0"
+version = "3.4.1"
 description = "Persistent, stale-free, local and cross-machine caching for Python functions."
 optional = false
 python-versions = "*"
 groups = ["main"]
 files = [
-    {file = "cachier-3.4.0-py3-none-any.whl", hash = "sha256:8bcc63d4d60949683120e4d9090412df0f34ee5d922dfff55ce26d5c43f77f9a"},
-    {file = "cachier-3.4.0.tar.gz", hash = "sha256:0a018f7474abd998c75382454e9d28c81f8ad32d66787eecedfd3d9791f523a2"},
+    {file = "cachier-3.4.1-py3-none-any.whl", hash = "sha256:a1fc19f5af052bec2dcba290a7066bf05460555d1b21daa7eb169b3b9585ee5e"},
+    {file = "cachier-3.4.1.tar.gz", hash = "sha256:b99d115bfccd49cc829becd23f2f769163ad708e4ad1e5998e2a38f01e8d8bd6"},
 ]
 
 [package.dependencies]
